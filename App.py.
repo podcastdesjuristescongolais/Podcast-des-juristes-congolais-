@@ -1,0 +1,73 @@
+import streamlit as st
+
+# Configuration de la page
+st.set_page_config(page_title="Générateur Podcast Juridique", layout="wide")
+
+# Style CSS pour une allure professionnelle
+st.markdown("""
+    <style>
+    .main { background-color: #f5f7f9; }
+    .stButton>button { width: 100%; background-color: #004a99; color: white; }
+    </style>
+    """, unsafe_allow_html=True)
+
+st.title("⚖️ Assistant "Partenaire de Code" : Podcast Juridique")
+st.subheader("Générez vos conducteurs d'émission en un clic")
+
+# Barre latérale pour la saisie des données
+with st.sidebar:
+    st.header("Paramètres de l'émission")
+    theme = st.text_input("Thème de l'émission", "Ex: Le divorce par consentement mutuel")
+    intervenant = st.text_input("Nom de l'intervenant", "Maître Serdroque NKONDZO")
+    date_emission = st.date_input("Date de l'émission")
+    heure_emission = st.time_input("Heure de l'émission")
+    format_podcast = st.selectbox("Format", ["15 minutes", "30 minutes", "45 minutes"])
+    
+    generer = st.button("Générer le questionnaire")
+
+# Zone d'affichage du résultat
+if generer:
+    st.info(f"Conducteur généré pour le thème : **{theme}**")
+    
+    # Structure basée sur ton modèle PDF
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.markdown(f"### 📋 En-tête")
+        st.write(f"**Intervenant:** {intervenant}")
+        st.write(f"**Date:** {date_emission}")
+        st.write(f"**Heure:** {heure_emission}")
+        st.write(f"**Format:** {format_podcast} - Langage accessible")
+
+        st.markdown("---")
+        
+        st.markdown("### I- Les bases (3 min)")
+        st.write(f"1. Concrètement, ça veut dire quoi '{theme}' ?")
+        st.write(f"2. Est-ce que cela concerne tout le monde ou seulement certains cas spécifiques ?")
+        st.write(f"3. Que dit précisément la loi congolaise là-dessus ?")
+
+    with col2:
+        st.markdown("### II- Le choc de la réalité (5 min)")
+        st.write(f"1. Quel est l'impact réel sur le quotidien des Congolais ?")
+        st.write(f"2. Comment ce sujet affecte-t-il la famille et les enfants ?")
+        st.write(f"3. Avec l'inflation actuelle, comment cette règle s'adapte-t-elle ?")
+
+    st.markdown("---")
+    
+    col3, col4 = st.columns([1, 1])
+    
+    with col3:
+        st.markdown("### III- Les problèmes et les tricheries (4 min)")
+        st.write(f"1. Comment la loi est-elle contournée dans le secteur informel ?")
+        st.write(f"2. Vers qui se tourner en cas de litige sans risquer de représailles ?")
+        st.write(f"3. Quel est le rôle réel des autorités de contrôle ?")
+
+    with col4:
+        st.markdown("### IV- Solutions & Conseils (3 min)")
+        st.write(f"1. Quels sont les risques économiques si on durcit la loi ?")
+        st.write(f"2. Conseil d'expert : Quelle est la priorité aujourd'hui au Congo ?")
+
+    # Option de téléchargement
+    st.button("💾 Télécharger le PDF (Bientôt disponible)")
+else:
+    st.write("Remplissez les informations à gauche et cliquez sur le bouton pour voir le modèle.")
